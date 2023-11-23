@@ -1,6 +1,5 @@
 {
-  "ourPlace" : 0,
-  "dealerPlace" : 0,
-  "haveOtherPlayersBid" : false,
-  "numberOfBidsBeforeUs" : 0
+  "biddingPosition" : 4,
+  "totalPlayers" : 4,
+  "howManyHaveBid" : 0
 }

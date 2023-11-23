@@ -13,10 +13,32 @@ public class GameState extends GameStateGenerated {
     }
 
     public Player getUs() {
-        return this.players.first(p -> p.getName().equals("PokerGPT"));
+        return this.players.get(this.getInAction());
     }
 
     public Status asStatus() {
-        return new Status();
+        Integer ourIndex = this.getInAction();
+        Integer dealerIndex = this.getDealer();
+        int totalPlayers = this.getPlayers().size();
+
+        return getStatus(ourIndex, dealerIndex, totalPlayers);
+    }
+
+    public static Status getStatus(Integer ourIndex, Integer dealerIndex, int totalPlayers) {
+        dealerIndex = dealerIndex + 2;
+        int ourPositionFromDealer;
+        if (ourIndex == dealerIndex) {
+            ourPositionFromDealer = totalPlayers;
+        } else if (ourIndex < dealerIndex) {
+            ourPositionFromDealer = (totalPlayers + ourIndex) - dealerIndex;
+        } else {
+            ourPositionFromDealer = ourIndex - dealerIndex;
+        }
+
+        return new Status(ourPositionFromDealer, totalPlayers, 0);
+    }
+
+    private int ourPosition(int dealer, int ourIndex) {
+        return (ourIndex - dealer + 4) % 4;
     }
 }

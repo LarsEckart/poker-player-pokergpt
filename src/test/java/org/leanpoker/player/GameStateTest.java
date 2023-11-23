@@ -1,6 +1,7 @@
 package org.leanpoker.player;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import org.approvaltests.Approvals;
 import org.approvaltests.JsonJacksonApprovals;
 import org.junit.jupiter.api.Test;
 
@@ -24,7 +25,7 @@ class GameStateTest {
         JsonJacksonApprovals.verifyAsJson(status);
     }
 
-    private static GameState loadGameState() throws JsonProcessingException {
+    public static GameState loadGameState() throws JsonProcessingException {
         String json = """
                 {
                   "tournament_id": "655e6ea29c97ef0002da0843",

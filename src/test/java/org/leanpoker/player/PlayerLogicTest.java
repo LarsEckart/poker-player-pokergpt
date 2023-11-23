@@ -1,5 +1,6 @@
 package org.leanpoker.player;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import org.approvaltests.combinations.CombinationApprovals;
 import org.approvaltests.combinations.SkipCombination;
 import org.junit.jupiter.api.Test;
@@ -7,17 +8,18 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.leanpoker.player.GameStateTest.loadGameState;
 
 class PlayerLogicTest {
 
 
     @Test
-    void shouldWeGoAllIn() {
-        GameState gameState = new GameState();
-        gameState.setPlayers(List.of(
-                new Player(
+    void shouldWeGoAllIn() throws JsonProcessingException {
+        GameState gameState = loadGameState();
+        gameState.getUs().setHoleCards(
+                List.of(
                         new Card("A", "hearts"),
-                        new Card("A", "spades"))));
+                        new Card("A", "spades")));
 
         assertEquals(4000, PlayerLogic.gameLogic(gameState));
     }
