@@ -15,6 +15,15 @@ class GameStateTest {
         JsonJacksonApprovals.verifyAsJson(us);
     }
 
+    @Test
+    void testShowState() throws JsonProcessingException {
+        GameState gameState = loadGameState();
+
+        Status status = gameState.asStatus();
+
+        JsonJacksonApprovals.verifyAsJson(status);
+    }
+
     private static GameState loadGameState() throws JsonProcessingException {
         String json = """
                 {

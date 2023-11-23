@@ -12,8 +12,8 @@ public class PlayerLogic {
 
     private static final Logger log = getLogger(PlayerLogic.class);
 
-    static final int VERSION_NUMBER = 11;
-    static final String VERSION = VERSION_NUMBER + " all in with chen formula";
+    static final int VERSION_NUMBER = 12;
+    static final String VERSION = VERSION_NUMBER + " . r separate generated code";
 
     // request based on https://leanpoker.org/docs/api/player
     public static int betRequest(JsonNode json) throws JsonProcessingException {
