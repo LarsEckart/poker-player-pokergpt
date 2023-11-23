@@ -29,7 +29,7 @@ public class GameState {
     @JsonProperty("dealer")
     private Integer dealer;
     @JsonProperty("community_cards")
-    private List<Object> communityCards;
+    private List<Card> communityCards;
     @JsonProperty("current_buy_in")
     private Integer currentBuyIn;
     @JsonProperty("pot")
@@ -118,12 +118,12 @@ public class GameState {
     }
 
     @JsonProperty("community_cards")
-    public List<Object> getCommunityCards() {
+    public List<Card> getCommunityCards() {
         return communityCards;
     }
 
     @JsonProperty("community_cards")
-    public void setCommunityCards(List<Object> communityCards) {
+    public void setCommunityCards(List<Card> communityCards) {
         this.communityCards = communityCards;
     }
 

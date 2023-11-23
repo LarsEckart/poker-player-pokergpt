@@ -11,8 +11,8 @@ public class PlayerLogic {
 
     private static final Logger log = getLogger(PlayerLogic.class);
 
-    static final int VERSION_NUMBER = 4;
-    static final String VERSION = VERSION_NUMBER + " should go all in?";
+    static final int VERSION_NUMBER = 5;
+    static final String VERSION = VERSION_NUMBER + " with a test";
 
     // request based on https://leanpoker.org/docs/api/player
     public static int betRequest(JsonNode json) throws JsonProcessingException {
@@ -20,6 +20,10 @@ public class PlayerLogic {
         ObjectMapper objectMapper = new ObjectMapper();
         GameState gameState = objectMapper.readValue(json.toString(), GameState.class);
 
+        return gameLogic(gameState);
+    }
+
+    public static int gameLogic(GameState gameState) {
         if (shouldGoAllIn(gameState)) {
             return 4000;
         }

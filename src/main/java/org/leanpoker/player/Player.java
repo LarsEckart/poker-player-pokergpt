@@ -22,13 +22,24 @@ public class Player {
     @JsonProperty("bet")
     private Integer bet;
     @JsonProperty("hole_cards")
-    private List<Object> holeCards;
+    private List<Card> holeCards;
     @JsonProperty("version")
     private String version;
     @JsonProperty("id")
     private Integer id;
     @JsonIgnore
     private Map<String, Object> additionalProperties = new LinkedHashMap<String, Object>();
+
+    public Player() {
+    }
+
+    public Player(String name, int i, String active, int i1, List<Card> cards, String s, int i2) {
+
+    }
+
+    public Player(Card... cards) {
+        this.holeCards = List.of(cards);
+    }
 
     @JsonProperty("name")
     public String getName() {
@@ -71,12 +82,12 @@ public class Player {
     }
 
     @JsonProperty("hole_cards")
-    public List<Object> getHoleCards() {
+    public List<Card> getHoleCards() {
         return holeCards;
     }
 
     @JsonProperty("hole_cards")
-    public void setHoleCards(List<Object> holeCards) {
+    public void setHoleCards(List<Card> holeCards) {
         this.holeCards = holeCards;
     }
 
