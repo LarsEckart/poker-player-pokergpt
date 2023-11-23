@@ -5,20 +5,21 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 
+import java.util.List;
+
 import static org.slf4j.LoggerFactory.getLogger;
 
 public class PlayerLogic {
 
     private static final Logger log = getLogger(PlayerLogic.class);
 
-    static final int VERSION_NUMBER = 6;
-    static final String VERSION = VERSION_NUMBER + " with a tests";
+    static final int VERSION_NUMBER = 7;
+    static final String VERSION = VERSION_NUMBER + " with a better tests";
 
     // request based on https://leanpoker.org/docs/api/player
     public static int betRequest(JsonNode json) throws JsonProcessingException {
         log.info("betRequest: " + json);
-        ObjectMapper objectMapper = new ObjectMapper();
-        GameState gameState = objectMapper.readValue(json.toString(), GameState.class);
+        GameState gameState = GameState.load(json.toString());
 
         return gameLogic(gameState);
     }
@@ -31,11 +32,15 @@ public class PlayerLogic {
     }
 
     private static boolean shouldGoAllIn(GameState gameState) {
-        if (gameState.getUs().getHoleCards().size() != 2) {
+        List<Card> holeCards = gameState.getUs().getHoleCards();
+        if (holeCards.size() != 2) {
             return true;
         }
+        return shouldGoAllIn(holeCards.get(0), holeCards.get(1));
+    }
+
+    public static boolean shouldGoAllIn(Card card, Card card1) {
         return true;
-//        return shouldGoAllInOnInitialDraw(gameState.getHoleCards()[0], gameState.getHoleCards()[1]);
     }
 
     public static void showdown(JsonNode game) {

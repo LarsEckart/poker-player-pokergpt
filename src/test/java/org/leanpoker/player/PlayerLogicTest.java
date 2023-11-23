@@ -10,12 +10,12 @@ class PlayerLogicTest {
 
 
     @Test
-    void whenPairThenAllIn() {
+    void shouldWeGoAllIn() {
         GameState gameState = new GameState();
         gameState.setPlayers(List.of(
                 new Player(
-                        new Card("6", "hearts"),
-                        new Card("10", "spades"))));
+                        new Card("A", "hearts"),
+                        new Card("A", "spades"))));
 
         assertEquals(4000, PlayerLogic.gameLogic(gameState));
     }

@@ -38,6 +38,7 @@ public class Player {
     }
 
     public Player(Card... cards) {
+        this.name = "PokerGPT";
         this.holeCards = List.of(cards);
     }
 

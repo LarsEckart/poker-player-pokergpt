@@ -8,10 +8,14 @@ import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.lambda.query.Queryable;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class GameState {
+
+    public static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
 
     @JsonProperty("players")
     private Queryable<Player> players;
@@ -37,6 +41,10 @@ public class GameState {
     private Integer pot;
     @JsonIgnore
     private Map<String, Object> additionalProperties = new LinkedHashMap<String, Object>();
+
+    public static GameState load(String json) throws JsonProcessingException {
+        return OBJECT_MAPPER.readValue(json, GameState.class);
+    }
 
     @JsonProperty("players")
     public List<Player> getPlayers() {

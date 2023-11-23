@@ -1,15 +1,13 @@
 package org.leanpoker.player;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import org.approvaltests.JsonApprovals;
 import org.approvaltests.JsonJacksonApprovals;
 import org.junit.jupiter.api.Test;
 
 class GameStateTest {
 
     @Test
-    void name() throws JsonProcessingException {
+    void findUs() throws JsonProcessingException {
         GameState gameState = loadGameState();
 
         Player us = gameState.getUs();
@@ -84,9 +82,7 @@ class GameStateTest {
                 }
                 """;
 
-        ObjectMapper objectMapper = new ObjectMapper();
-
-        GameState gameState = objectMapper.readValue(json, GameState.class);
-        return gameState;
+        return GameState.load(json);
     }
+
 }
