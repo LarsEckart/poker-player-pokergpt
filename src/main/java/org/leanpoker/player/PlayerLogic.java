@@ -11,16 +11,23 @@ public class PlayerLogic {
 
     private static final Logger log = getLogger(PlayerLogic.class);
 
-    static final int VERSION_NUMBER = 3;
-    static final String VERSION = VERSION_NUMBER + " not folding all in with logging and json parsing";
+    static final int VERSION_NUMBER = 4;
+    static final String VERSION = VERSION_NUMBER + " should go all in?";
 
     // request based on https://leanpoker.org/docs/api/player
-    public static int betRequest(JsonNode request) throws JsonProcessingException {
-        log.info("betRequest: " + request);
+    public static int betRequest(JsonNode json) throws JsonProcessingException {
+        log.info("betRequest: " + json);
         ObjectMapper objectMapper = new ObjectMapper();
-        Request request1 = objectMapper.readValue(request.toString(), Request.class);
+        GameState gameState = objectMapper.readValue(json.toString(), GameState.class);
 
-        return 4000;
+        if (shouldGoAllIn(gameState)) {
+            return 4000;
+        }
+        return 0;
+    }
+
+    private static boolean shouldGoAllIn(GameState gameState) {
+        return true;
     }
 
     public static void showdown(JsonNode game) {
