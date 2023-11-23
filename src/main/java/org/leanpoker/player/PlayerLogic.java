@@ -12,8 +12,8 @@ public class PlayerLogic {
 
     private static final Logger log = getLogger(PlayerLogic.class);
 
-    static final int VERSION_NUMBER = 8;
-    static final String VERSION = VERSION_NUMBER + " with test for everything";
+    static final int VERSION_NUMBER = 9;
+    static final String VERSION = VERSION_NUMBER + " with advanced calculation";
 
     // request based on https://leanpoker.org/docs/api/player
     public static int betRequest(JsonNode json) throws JsonProcessingException {
@@ -40,11 +40,14 @@ public class PlayerLogic {
 
     public static boolean shouldGoAllIn(Card card1, Card card2) {
         var sortedCards = sortCards(card1, card2);
-        return true;
+        if (ChenFormula.calculate(sortedCards.get(0), sortedCards.get(1)) > 7) {
+            return true;
+        }
+        return false;
     }
 
     private static List<Card> sortCards(Card card1, Card card2) {
-        if (card1.getRank() < card2.getRank()) {
+        if (card1.asNumber() < card2.asNumber()) {
             return List.of(card2, card1);
         }
         return List.of(card1, card2);
