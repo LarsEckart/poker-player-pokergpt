@@ -12,8 +12,8 @@ public class PlayerLogic {
 
     private static final Logger log = getLogger(PlayerLogic.class);
 
-    static final int VERSION_NUMBER = 10;
-    static final String VERSION = VERSION_NUMBER + " smarter all-in";
+    static final int VERSION_NUMBER = 11;
+    static final String VERSION = VERSION_NUMBER + " all in with chen formula";
 
     // request based on https://leanpoker.org/docs/api/player
     public static int betRequest(JsonNode json) throws JsonProcessingException {
@@ -35,16 +35,13 @@ public class PlayerLogic {
         if (holeCards.size() != 2) {
             return true;
         }
-        return shouldGoAllIn(holeCards.get(0), holeCards.get(1));
+        return shouldGoAllInPreFlop(holeCards.get(0), holeCards.get(1));
     }
 
-    public static boolean shouldGoAllIn(Card card1, Card card2) {
+    public static boolean shouldGoAllInPreFlop(Card card1, Card card2) {
         var sortedCards = sortCards(card1, card2);
-        return card1.asNumber() == card2.asNumber() || 10 <= card1.asNumber();
-//        if (ChenFormula.calculate(sortedCards.get(0), sortedCards.get(1)) > 7) {
-//            return true;
-//        }
-//        return false;
+//        return card1.asNumber() == card2.asNumber() || 10 <= card1.asNumber();
+        return 7 < ChenFormula.calculate(sortedCards.get(0), sortedCards.get(1));
     }
 
     private static List<Card> sortCards(Card card1, Card card2) {

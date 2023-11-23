@@ -40,6 +40,6 @@ class PlayerLogicTest {
             throw new SkipCombination();
         }
 
-        return PlayerLogic.shouldGoAllIn(card, card2);
+        return PlayerLogic.shouldGoAllInPreFlop(card, card2);
     }
 }
