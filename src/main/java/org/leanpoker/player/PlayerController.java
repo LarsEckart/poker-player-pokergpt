@@ -33,16 +33,16 @@ public class PlayerController {
         String action = body.get("action");
         String gameState = body.get("game_state");
         if ("bet_request".equals(action)) {
-            String response = String.valueOf(Player.betRequest(mapper.readTree(gameState)));
+            String response = String.valueOf(PlayerLogic.betRequest(mapper.readTree(gameState)));
             log.info("bet_request response: " + response);
             return response;
         }
         if ("showdown".equals(action)) {
             log.info("showdown: " + gameState);
-            Player.showdown(mapper.readTree(gameState));
+            PlayerLogic.showdown(mapper.readTree(gameState));
         }
         if ("version".equals(action)) {
-            return Player.VERSION;
+            return PlayerLogic.VERSION;
         }
         return "";
     }
