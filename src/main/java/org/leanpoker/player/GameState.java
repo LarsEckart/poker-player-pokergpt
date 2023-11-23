@@ -8,12 +8,13 @@ import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.lambda.query.Queryable;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class GameState {
 
     @JsonProperty("players")
-    private List<Player> players;
+    private Queryable<Player> players;
     @JsonProperty("tournament_id")
     private String tournamentId;
     @JsonProperty("game_id")
@@ -44,7 +45,7 @@ public class GameState {
 
     @JsonProperty("players")
     public void setPlayers(List<Player> players) {
-        this.players = players;
+        this.players = Queryable.as(players);
     }
 
     @JsonProperty("tournament_id")
@@ -157,4 +158,7 @@ public class GameState {
         this.additionalProperties.put(name, value);
     }
 
+    public Player getUs() {
+        return this.players.first(p -> p.getName().equals("PokerGPT"));
+    }
 }
