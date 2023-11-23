@@ -2,7 +2,6 @@ package org.leanpoker.player;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 
 import java.util.List;
@@ -13,8 +12,8 @@ public class PlayerLogic {
 
     private static final Logger log = getLogger(PlayerLogic.class);
 
-    static final int VERSION_NUMBER = 7;
-    static final String VERSION = VERSION_NUMBER + " with a better tests";
+    static final int VERSION_NUMBER = 8;
+    static final String VERSION = VERSION_NUMBER + " with test for everything";
 
     // request based on https://leanpoker.org/docs/api/player
     public static int betRequest(JsonNode json) throws JsonProcessingException {
