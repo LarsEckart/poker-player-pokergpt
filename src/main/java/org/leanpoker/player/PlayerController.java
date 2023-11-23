@@ -9,10 +9,16 @@ import io.micronaut.http.annotation.Consumes;
 import io.micronaut.http.annotation.Controller;
 import io.micronaut.http.annotation.Get;
 import io.micronaut.http.annotation.Post;
+import org.slf4j.Logger;
+
 import java.util.Map;
+
+import static org.slf4j.LoggerFactory.getLogger;
 
 @Controller()
 public class PlayerController {
+
+    private static final Logger log = getLogger(PlayerController.class);
 
     ObjectMapper mapper = new ObjectMapper();
 
@@ -27,9 +33,12 @@ public class PlayerController {
         String action = body.get("action");
         String gameState = body.get("game_state");
         if ("bet_request".equals(action)) {
-            return String.valueOf(Player.betRequest(mapper.readTree(gameState)));
+            String response = String.valueOf(Player.betRequest(mapper.readTree(gameState)));
+            log.info("bet_request response: " + response);
+            return response;
         }
         if ("showdown".equals(action)) {
+            log.info("showdown: " + gameState);
             Player.showdown(mapper.readTree(gameState));
         }
         if ("version".equals(action)) {
