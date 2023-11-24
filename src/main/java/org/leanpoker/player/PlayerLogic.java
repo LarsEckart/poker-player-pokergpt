@@ -12,8 +12,8 @@ public class PlayerLogic {
 
     private static final Logger log = getLogger(PlayerLogic.class);
 
-    static final int VERSION_NUMBER = 24;
-    static final String VERSION = VERSION_NUMBER + " late game destroyer";
+    static final int VERSION_NUMBER = 25;
+    static final String VERSION = VERSION_NUMBER + " more conservative";
 
     // request based on https://leanpoker.org/docs/api/player
     public static int betRequest(JsonNode json) throws JsonProcessingException {
@@ -34,7 +34,7 @@ public class PlayerLogic {
 
         int chenScore = gameState.calculateChenScore();
         if (30 < gameState.getBigBlind()) {
-            if (10 <= chenScore) {
+            if (8 <= chenScore) {
                 return 4000;
             }
         } else {
