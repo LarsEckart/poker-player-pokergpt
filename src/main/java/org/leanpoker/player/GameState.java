@@ -4,6 +4,8 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.lambda.query.Queryable;
 
+import java.util.List;
+
 public class GameState extends GameStateGenerated {
 
     public static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
@@ -11,6 +13,16 @@ public class GameState extends GameStateGenerated {
 
     public static GameState load(String json) throws JsonProcessingException {
         return OBJECT_MAPPER.readValue(json, GameState.class);
+    }
+
+    public boolean haveSemiprofessionalsBid() {
+        Player semiprofessionals = Queryable.as(players).first(p -> p.getName().contains("The Semiprofessionals"));
+
+        return getBigBlind() < semiprofessionals.getBet();
+    }
+
+    public boolean weHavePair(List<Card> holeCards) {
+        return holeCards.get(0).asNumber() == holeCards.get(1).asNumber();
     }
 
     public Player getUs() {
