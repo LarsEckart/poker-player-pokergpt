@@ -12,8 +12,8 @@ public class PlayerLogic {
 
     private static final Logger log = getLogger(PlayerLogic.class);
 
-    static final int VERSION_NUMBER = 23;
-    static final String VERSION = VERSION_NUMBER + " chen ten";
+    static final int VERSION_NUMBER = 24;
+    static final String VERSION = VERSION_NUMBER + " late game destroyer";
 
     // request based on https://leanpoker.org/docs/api/player
     public static int betRequest(JsonNode json) throws JsonProcessingException {
@@ -32,23 +32,18 @@ public class PlayerLogic {
             return 4000;
         }
 
-        if(shouldGoAllInPreFlop(gameState.getOurHoleCards().get(0), gameState.getOurHoleCards().get(1))){
-            return 4000;
+        int chenScore = gameState.calculateChenScore();
+        if (30 < gameState.getBigBlind()) {
+            if (10 <= chenScore) {
+                return 4000;
+            }
+        } else {
+            if (gameState.weHavePair()) {
+                return 4000;
+            }
         }
 
         return 0;
-    }
-
-    public static boolean shouldGoAllInPreFlop(Card card1, Card card2) {
-        var sortedCards = sortCards(card1, card2);
-        return 10 < ChenFormula.calculate(sortedCards.get(0), sortedCards.get(1));
-    }
-
-    private static List<Card> sortCards(Card card1, Card card2) {
-        if (card1.asNumber() < card2.asNumber()) {
-            return List.of(card2, card1);
-        }
-        return List.of(card1, card2);
     }
 
     public static void showdown(JsonNode game) {

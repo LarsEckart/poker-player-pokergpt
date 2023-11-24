@@ -62,4 +62,8 @@ public class GameState extends GameStateGenerated {
     public boolean isFirstRound() {
         return this.getUs().getBet() <= this.getBigBlind();
     }
+
+    public int calculateChenScore() {
+        return (int) ChenFormula.calculate(getOurHoleCards().get(0), getOurHoleCards().get(1));
+    }
 }
