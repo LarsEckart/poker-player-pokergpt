@@ -12,8 +12,8 @@ public class PlayerLogic {
 
     private static final Logger log = getLogger(PlayerLogic.class);
 
-    static final int VERSION_NUMBER = 20;
-    static final String VERSION = VERSION_NUMBER + " bugfix to beat everyone";
+    static final int VERSION_NUMBER = 21;
+    static final String VERSION = VERSION_NUMBER + " bugfix to beat everyone even more";
 
     // request based on https://leanpoker.org/docs/api/player
     public static int betRequest(JsonNode json) throws JsonProcessingException {
@@ -25,7 +25,7 @@ public class PlayerLogic {
 
     public static int gameLogic(GameState gameState) {
         if (gameState.isFirstRound() && !gameState.potIsBig()) {
-            return gameState.getMinimumRaise() * 2;
+            return gameState.getCurrentBuyIn() + gameState.getMinimumRaise() * 2;
         }
 
         if (gameState.weHavePair() && 8 < gameState.getOurHoleCards().get(0).asNumber()) {
