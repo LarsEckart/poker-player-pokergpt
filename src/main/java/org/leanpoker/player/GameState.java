@@ -50,4 +50,8 @@ public class GameState extends GameStateGenerated {
         }
         return null;
     }
+
+    public boolean isFirstRound() {
+        return this.getBigBlind() < this.getUs().getBet();
+    }
 }
