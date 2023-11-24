@@ -7,7 +7,7 @@ class StatusTest {
 
     private static String call(Integer ourIndex, Integer dealerIndex) {
 
-        Status status = GameState.getStatus(ourIndex, dealerIndex, 4);
+        Status status = GameState.getStatus(ourIndex, dealerIndex, 4, 0);
 
         String result = "";
         if (dealerIndex == 0) {
