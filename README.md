@@ -19,3 +19,6 @@ This is a gradle project that can be imported into any IDE. To run the player ex
 | Green Rabits | Java | [Repo](https://github.com/JonathanStoye/poker-player-green-rabbits)|
 | Charming Rabits | Python | [Repo](https://github.com/chbndrhnns/poker-player-charming-rabbit) |
 
+## Strategies
+
+![](./strategies.png)
