@@ -12,8 +12,8 @@ public class PlayerLogic {
 
     private static final Logger log = getLogger(PlayerLogic.class);
 
-    static final int VERSION_NUMBER = 12;
-    static final String VERSION = VERSION_NUMBER + " . r separate generated code";
+    static final int VERSION_NUMBER = 14;
+    static final String VERSION = VERSION_NUMBER + " take bidding position and previous bids into account";
 
     // request based on https://leanpoker.org/docs/api/player
     public static int betRequest(JsonNode json) throws JsonProcessingException {
@@ -33,6 +33,10 @@ public class PlayerLogic {
     private static boolean shouldGoAllIn(GameState gameState) {
         List<Card> holeCards = gameState.getUs().getHoleCards();
         if (holeCards.size() != 2) {
+            return true;
+        }
+        Status status = gameState.asStatus();
+        if (status.weAreLast() && status.howManyHaveBid() == 0) {
             return true;
         }
         return shouldGoAllInPreFlop(holeCards.get(0), holeCards.get(1));

@@ -3,6 +3,8 @@ package org.leanpoker.player;
 import org.approvaltests.combinations.CombinationApprovals;
 import org.junit.jupiter.api.Test;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 class StatusTest {
 
     private static String call(Integer ourIndex, Integer dealerIndex) {
@@ -31,5 +33,13 @@ class StatusTest {
                 places,
                 places
         );
+    }
+
+    @Test
+    void testIsLast() {
+
+        assertThat(GameState.getStatus(2, 0, 4, 0).weAreLast()).isTrue();
+
+        assertThat(GameState.getStatus(3, 0, 4, 0).weAreLast()).isFalse();
     }
 }
