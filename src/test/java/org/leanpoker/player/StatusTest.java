@@ -10,18 +10,17 @@ class StatusTest {
         Status status = GameState.getStatus(ourIndex, dealerIndex, 4);
 
         String result = "";
-        result += "Player 1\tPlayer 2\tPlayer 3\tPlayer 4\n";
         if (dealerIndex == 0) {
-            result += "D\t\t\t\n";
+            result += "D|s|B|1\n";
         } else if (dealerIndex == 1) {
-            result += "\tD\t\t\n";
+            result += "1|D|s|B\n";
         } else if (dealerIndex == 2) {
-            result += "\t\tD\t\n";
+            result += "B|1|D|s\n";
         } else if (dealerIndex == 3) {
-            result += "\t\t\tD\n";
+            result += "s|B|1|D\n";
         }
 
-        return "" + status.biddingPosition();
+        return status.biddingPosition() + " -> " + result;
     }
 
     @Test

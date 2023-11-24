@@ -25,20 +25,13 @@ public class GameState extends GameStateGenerated {
     }
 
     public static Status getStatus(Integer ourIndex, Integer dealerIndex, int totalPlayers) {
-        dealerIndex = dealerIndex + 2;
-        int ourPositionFromDealer;
-        if (ourIndex == dealerIndex) {
-            ourPositionFromDealer = totalPlayers;
-        } else if (ourIndex < dealerIndex) {
-            ourPositionFromDealer = (totalPlayers + ourIndex) - dealerIndex;
-        } else {
-            ourPositionFromDealer = ourIndex - dealerIndex;
+        int firstPlayerIndex = (dealerIndex + 3) % totalPlayers;
+
+        for (int i = 0; i < totalPlayers; i++) {
+            if ((firstPlayerIndex + i) % totalPlayers == ourIndex) {
+                return new Status(i + 1, totalPlayers, 0);
+            }
         }
-
-        return new Status(ourPositionFromDealer, totalPlayers, 0);
-    }
-
-    private int ourPosition(int dealer, int ourIndex) {
-        return (ourIndex - dealer + 4) % 4;
+        return null;
     }
 }
