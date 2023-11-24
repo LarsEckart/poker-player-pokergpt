@@ -15,14 +15,22 @@ public class GameState extends GameStateGenerated {
         return OBJECT_MAPPER.readValue(json, GameState.class);
     }
 
+    public boolean potIsBig() {
+        return getBigBlind() * 3 < getPot();
+    }
+
+    public List<Card> getOurHoleCards() {
+        return getUs().getHoleCards();
+    }
+
     public boolean haveSemiprofessionalsBid() {
         Player semiprofessionals = Queryable.as(players).first(p -> p.getName().contains("The Semiprofessionals"));
 
         return getBigBlind() < semiprofessionals.getBet();
     }
 
-    public boolean weHavePair(List<Card> holeCards) {
-        return holeCards.get(0).asNumber() == holeCards.get(1).asNumber();
+    public boolean weHavePair() {
+        return getUs().getHoleCards().get(0).asNumber() == getUs().getHoleCards().get(1).asNumber();
     }
 
     public Player getUs() {
