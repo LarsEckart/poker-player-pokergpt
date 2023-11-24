@@ -21,7 +21,7 @@ class PlayerLogicTest {
                         new Card("A", "hearts"),
                         new Card("A", "spades")));
 
-        assertEquals(4000, PlayerLogic.gameLogic(gameState));
+        assertEquals(6, PlayerLogic.gameLogic(gameState));
     }
 
     @Test

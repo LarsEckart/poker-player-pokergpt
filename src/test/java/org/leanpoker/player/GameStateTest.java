@@ -5,6 +5,8 @@ import org.approvaltests.Approvals;
 import org.approvaltests.JsonJacksonApprovals;
 import org.junit.jupiter.api.Test;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 class GameStateTest {
 
     @Test
@@ -23,6 +25,13 @@ class GameStateTest {
         Status status = gameState.asStatus();
 
         JsonJacksonApprovals.verifyAsJson(status);
+    }
+
+    @Test
+    void testFirstRound() throws JsonProcessingException {
+        GameState gameState = loadGameState();
+
+        assertThat(gameState.isFirstRound()).isTrue();
     }
 
     public static GameState loadGameState() throws JsonProcessingException {
