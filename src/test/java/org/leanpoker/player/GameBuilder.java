@@ -43,7 +43,7 @@ class GameBuilder {
         return this;
     }
 
-    public GameBuilder addAction(int playerPosition, int amount) {
+    public GameBuilder raise(int playerPosition, int amount) {
         if (amount < 0) {
             this.gameState.getPlayerAt(playerPosition - 1).setStatus("folded");
         } else {
@@ -56,5 +56,10 @@ class GameBuilder {
 
     public GameState build() {
         return gameState;
+    }
+
+    public GameBuilder fold(int i) {
+        this.raise(i, -1);
+        return this;
     }
 }
