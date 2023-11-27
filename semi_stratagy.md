@@ -1,3 +1,5 @@
+Created by [ChatGPT](https://chat.openai.com/share/22684e47-53c6-4945-a671-4289d30ad16e) 
+
 ```mermaid
 flowchart TD
     A[Start: Analyze Game State] --> B{Is it a Special Case?}
