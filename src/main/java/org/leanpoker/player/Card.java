@@ -11,4 +11,16 @@ record Card(String rank, String suit) {
             default -> Integer.parseInt(rank);
         };
     }
+
+    @Override
+    public String toString() {
+        var suitIcon = switch (suit) {
+            case "spades" -> "♠";
+            case "hearts" -> "♥";
+            case "clubs" -> "♣";
+            case "diamonds" -> "♦";
+            default -> suit;
+        };
+        return rank +  suitIcon;
+    }
 }

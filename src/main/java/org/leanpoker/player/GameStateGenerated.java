@@ -18,29 +18,29 @@ public class GameStateGenerated {
     @JsonProperty("game_id")
     protected String gameId;
     @JsonProperty("round")
-    protected Integer round;
+    protected int round;
     @JsonProperty("players")
     protected List<Player> players;
     @JsonProperty("small_blind")
-    protected Integer smallBlind;
+    protected int smallBlind;
     @JsonProperty("big_blind")
-    protected Integer bigBlind;
+    protected int bigBlind;
     @JsonProperty("orbits")
-    protected Integer orbits;
+    protected int orbits;
     @JsonProperty("dealer")
-    protected Integer dealer;
+    protected int dealer;
     @JsonProperty("community_cards")
     protected List<Object> communityCards;
     @JsonProperty("current_buy_in")
-    protected Integer currentBuyIn;
+    protected int currentBuyIn;
     @JsonProperty("pot")
-    protected Integer pot;
+    protected int pot;
     @JsonProperty("in_action")
-    protected Integer inAction;
+    protected int inAction;
     @JsonProperty("minimum_raise")
-    protected Integer minimumRaise;
+    protected int minimumRaise;
     @JsonProperty("bet_index")
-    protected Integer betIndex;
+    protected int betIndex;
     @JsonIgnore
     protected Map<String, Object> additionalProperties = new LinkedHashMap<String, Object>();
 
@@ -65,12 +65,12 @@ public class GameStateGenerated {
     }
 
     @JsonProperty("round")
-    public Integer getRound() {
+    public int getRound() {
         return round;
     }
 
     @JsonProperty("round")
-    public void setRound(Integer round) {
+    public void setRound(int round) {
         this.round = round;
     }
 
@@ -85,42 +85,42 @@ public class GameStateGenerated {
     }
 
     @JsonProperty("small_blind")
-    public Integer getSmallBlind() {
+    public int getSmallBlind() {
         return smallBlind;
     }
 
     @JsonProperty("small_blind")
-    public void setSmallBlind(Integer smallBlind) {
+    public void setSmallBlind(int smallBlind) {
         this.smallBlind = smallBlind;
     }
 
     @JsonProperty("big_blind")
-    public Integer getBigBlind() {
+    public int getBigBlind() {
         return bigBlind;
     }
 
     @JsonProperty("big_blind")
-    public void setBigBlind(Integer bigBlind) {
+    public void setBigBlind(int bigBlind) {
         this.bigBlind = bigBlind;
     }
 
     @JsonProperty("orbits")
-    public Integer getOrbits() {
+    public int getOrbits() {
         return orbits;
     }
 
     @JsonProperty("orbits")
-    public void setOrbits(Integer orbits) {
+    public void setOrbits(int orbits) {
         this.orbits = orbits;
     }
 
     @JsonProperty("dealer")
-    public Integer getDealer() {
+    public int getDealer() {
         return dealer;
     }
 
     @JsonProperty("dealer")
-    public void setDealer(Integer dealer) {
+    public void setDealer(int dealer) {
         this.dealer = dealer;
     }
 
@@ -135,52 +135,52 @@ public class GameStateGenerated {
     }
 
     @JsonProperty("current_buy_in")
-    public Integer getCurrentBuyIn() {
+    public int getCurrentBuyIn() {
         return currentBuyIn;
     }
 
     @JsonProperty("current_buy_in")
-    public void setCurrentBuyIn(Integer currentBuyIn) {
+    public void setCurrentBuyIn(int currentBuyIn) {
         this.currentBuyIn = currentBuyIn;
     }
 
     @JsonProperty("pot")
-    public Integer getPot() {
+    public int getPot() {
         return pot;
     }
 
     @JsonProperty("pot")
-    public void setPot(Integer pot) {
+    public void setPot(int pot) {
         this.pot = pot;
     }
 
     @JsonProperty("in_action")
-    public Integer getInAction() {
+    public int getInAction() {
         return inAction;
     }
 
     @JsonProperty("in_action")
-    public void setInAction(Integer inAction) {
+    public void setInAction(int inAction) {
         this.inAction = inAction;
     }
 
     @JsonProperty("minimum_raise")
-    public Integer getMinimumRaise() {
+    public int getMinimumRaise() {
         return minimumRaise;
     }
 
     @JsonProperty("minimum_raise")
-    public void setMinimumRaise(Integer minimumRaise) {
+    public void setMinimumRaise(int minimumRaise) {
         this.minimumRaise = minimumRaise;
     }
 
     @JsonProperty("bet_index")
-    public Integer getBetIndex() {
+    public int getBetIndex() {
         return betIndex;
     }
 
     @JsonProperty("bet_index")
-    public void setBetIndex(Integer betIndex) {
+    public void setBetIndex(int betIndex) {
         this.betIndex = betIndex;
     }
 

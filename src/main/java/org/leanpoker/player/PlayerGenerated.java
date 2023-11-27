@@ -16,17 +16,17 @@ public class PlayerGenerated {
     @JsonProperty("name")
     protected String name;
     @JsonProperty("stack")
-    protected Integer stack;
+    protected int stack;
     @JsonProperty("status")
     protected String status;
     @JsonProperty("bet")
-    protected Integer bet;
+    protected int bet;
     @JsonProperty("hole_cards")
     protected List<Card> holeCards;
     @JsonProperty("version")
     protected String version;
     @JsonProperty("id")
-    protected Integer id;
+    protected int id;
     @JsonIgnore
     protected Map<String, Object> additionalProperties = new LinkedHashMap<String, Object>();
 
@@ -53,12 +53,12 @@ public class PlayerGenerated {
     }
 
     @JsonProperty("stack")
-    public Integer getStack() {
+    public int getStack() {
         return stack;
     }
 
     @JsonProperty("stack")
-    public void setStack(Integer stack) {
+    public void setStack(int stack) {
         this.stack = stack;
     }
 
@@ -73,12 +73,12 @@ public class PlayerGenerated {
     }
 
     @JsonProperty("bet")
-    public Integer getBet() {
+    public int getBet() {
         return bet;
     }
 
     @JsonProperty("bet")
-    public void setBet(Integer bet) {
+    public void setBet(int bet) {
         this.bet = bet;
     }
 
@@ -103,12 +103,12 @@ public class PlayerGenerated {
     }
 
     @JsonProperty("id")
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 
     @JsonProperty("id")
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -120,5 +120,10 @@ public class PlayerGenerated {
     @JsonAnySetter
     public void setAdditionalProperty(String name, Object value) {
         this.additionalProperties.put(name, value);
+    }
+
+    @JsonIgnore
+    public void increaseBet(int amount) {
+        setBet(this.bet + amount);
     }
 }

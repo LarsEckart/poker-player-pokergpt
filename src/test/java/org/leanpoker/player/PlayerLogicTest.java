@@ -1,49 +1,60 @@
 package org.leanpoker.player;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import org.approvaltests.combinations.CombinationApprovals;
-import org.approvaltests.combinations.SkipCombination;
-import org.junit.jupiter.api.Disabled;
+import org.approvaltests.Approvals;
+import org.approvaltests.JsonJacksonApprovals;
+import org.approvaltests.core.Options;
+import org.approvaltests.reporters.UseReporter;
+import org.approvaltests.reporters.intellij.IntelliJReporter;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.leanpoker.player.GameStateTest.loadGameState;
-
+@UseReporter(IntelliJReporter.class)
 class PlayerLogicTest {
 
-
     @Test
-    void shouldWeGoAllIn() throws JsonProcessingException {
-        GameState gameState = loadGameState();
-        gameState.getUs().setHoleCards(
-                List.of(
-                        new Card("A", "hearts"),
-                        new Card("A", "spades")));
+    void verifyOurBehaviour() {
+        var expected = """
+            bid $40 for cards 2♣, 2♦
+            """;
+        GameBuilder b = new GameBuilder(4)
+                .weAreAt(2, "2-clubs", "2-diamonds")
+                .dealerIsAt(4)
+                .smallBlindIs(10);
+        b.addAction(3, -1);
+        b.addAction(4, 20);
+        b.addAction(1, -1);
+//        JsonJacksonApprovals.verifyAsJson(b.build());
 
-        assertEquals(12, PlayerLogic.gameLogic(gameState));
+        verifyBid(b, expected);
     }
 
-    @Disabled("not relevant right now anymore")
     @Test
-    void name() {
-        String[] numbers = {"2", "3", "4", "5", "6", "7", "8", "9", "10",
-                "J", "Q", "K", "A"};
-        String[] suits = {"hearts", "spades", "diamonds", "clubs"};
+    void foldWhenLowChenCardsAndOpponentGoesAllIn() {
+        var expected = """
+            bid $0 for cards 6♠, 2♠
+            """;
+        GameBuilder b = new GameBuilder(4)
+                .weAreAt(2, "6-spades", "2-spades")
+                .dealerIsAt(2)
+                .smallBlindIs(15);
+        b.addAction(1, -1);
+        b.addAction(2, 20);
+        b.addAction(3, -1);
+        b.addAction(4, 200);
 
-        CombinationApprovals.verifyAllCombinations(
-                PlayerLogicTest::assessStartingHand,
-                numbers, suits, numbers, suits);
+        verifyBid(b, expected);
     }
 
-    public static boolean assessStartingHand(String number1, String suit1, String number2, String suit2) {
-        Card card = new Card(number1, suit1);
-        Card card2 = new Card(number2, suit2);
-        if (card.equals(card2)) {
-            throw new SkipCombination();
-        }
+    private void verifyBid(GameBuilder builder, String expected) {
+        GameState gameState = builder.build();
+        int bid = PlayerLogic.gameLogic(gameState);
 
-        return true;//PlayerLogic.shouldGoAllInPreFlop(card, card2);
+        String result = String.format("bid $%d for cards %s", bid, printCards(gameState.getOurHoleCards()));
+        Approvals.verify(result, new Options().inline(expected));
+    }
+
+    private String printCards(List<Card> ourHoleCards) {
+        return String.join(", ", ourHoleCards.stream().map(Card::toString).toList());
     }
 }

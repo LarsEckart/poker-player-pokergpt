@@ -10,6 +10,10 @@ public class Player extends PlayerGenerated {
     public Player() {
     }
 
+    public Player(String name) {
+        this.name = name;
+    }
+
     public Player(Card... cards) {
         this.name = "PokerGPT";
         this.holeCards = List.of(cards);

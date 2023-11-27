@@ -1,5 +1,6 @@
 package org.leanpoker.player;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.lambda.query.Queryable;
@@ -19,6 +20,7 @@ public class GameState extends GameStateGenerated {
         return getBigBlind() * 3 < getPot();
     }
 
+    @JsonIgnore
     public List<Card> getOurHoleCards() {
         return getUs().getHoleCards();
     }
@@ -33,6 +35,7 @@ public class GameState extends GameStateGenerated {
         return getUs().getHoleCards().get(0).asNumber() == getUs().getHoleCards().get(1).asNumber();
     }
 
+    @JsonIgnore
     public Player getUs() {
         return this.players.get(this.getInAction());
     }
@@ -59,11 +62,17 @@ public class GameState extends GameStateGenerated {
         return null;
     }
 
+    @JsonIgnore
     public boolean isFirstRound() {
         return this.getUs().getBet() <= this.getBigBlind();
     }
 
     public int calculateChenScore() {
         return (int) ChenFormula.calculate(getOurHoleCards().get(0), getOurHoleCards().get(1));
+    }
+
+    @JsonIgnore
+    public PlayerGenerated getPlayerAt(int index) {
+        return this.getPlayers().get(index % this.getPlayers().size());
     }
 }
